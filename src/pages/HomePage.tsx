@@ -27,7 +27,6 @@ function HomePage() {
 
     getData();
   };
-
   return (
     <main>
       <form onSubmit={ handleSubmit }>
@@ -46,7 +45,7 @@ function HomePage() {
       >
         Carrinho
       </button>
-      <Categories />
+      <Categories setProducts={ setProducts } />
       {loading ? <Loading /> : <SearchList products={ products } /> }
     </main>
   );

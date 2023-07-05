@@ -1,22 +1,49 @@
-import { useState } from 'react';
-import { getCategories } from '../services/api';
+import { useEffect, useState } from 'react';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { ProductsData } from '../types';
 
 type Category = {
   id: string;
   name: string;
 };
 
-function Categories() {
+type PropComponent = {
+  setProducts: React.Dispatch<React.SetStateAction<ProductsData[]>>;
+};
+
+function Categories({ setProducts }: PropComponent) {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
-  getCategories().then((list) => {
-    setCategoryList(list);
-  });
+
+  const handleClick = (name: string) => {
+    const getData = async () => {
+      const data = await getProductsFromCategoryAndQuery('', name);
+      setProducts(data.results);
+    };
+    getData();
+  };
+
+  useEffect(() => {
+    const categorys = async () => {
+      const listCategory = await getCategories();
+      setCategoryList(listCategory);
+    };
+    categorys();
+  }, []);
+
   return (
     <div>
       <h3>Categorias:</h3>
-      { categoryList.map((item) => {
-        return <button data-testid="category" key={ item.id }>{item.name}</button>;
-      }) }
+      {categoryList.map((item) => {
+        return (
+          <button
+            onClick={ () => handleClick(item.name) }
+            data-testid="category"
+            key={ item.id }
+          >
+            {item.name}
+          </button>
+        );
+      })}
     </div>
   );
 }
