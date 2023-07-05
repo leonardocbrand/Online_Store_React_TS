@@ -22,7 +22,7 @@ function HomePage() {
 
     getData();
   };
-
+  // requisito 6
   return (
     <main>
       <form onSubmit={ handleSubmit }>
