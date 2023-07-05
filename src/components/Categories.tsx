@@ -13,6 +13,7 @@ function Categories() {
   });
   return (
     <div>
+      <h3>Categorias:</h3>
       { categoryList.map((item) => {
         return <button data-testid="category" key={ item.id }>{item.name}</button>;
       }) }
