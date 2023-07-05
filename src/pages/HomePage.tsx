@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Categories from '../components/Categories';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function HomePage() {
       <h2 data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </h2>
+      <Categories />
     </main>
   );
 }
