@@ -7,7 +7,6 @@ import Categories from '../components/Categories';
 function HomePage() {
   const [searchInput, setSearchInput] = useState('');
   const [products, setProducts] = useState<ProductsData[]>([]);
-  
   const navigate = useNavigate();
 
   const handleClick = () => {
