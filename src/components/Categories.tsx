@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductsData } from '../types';
 
@@ -22,9 +22,16 @@ function Categories({ setProducts }: PropComponent) {
     getData();
   };
 
-  getCategories().then((list) => {
-    setCategoryList(list);
-  });
+  const categorys = async () => {
+    const listCategory = await getCategories();
+    setCategoryList(listCategory);
+  };
+  useEffect(() => {
+    categorys();
+  }, []);
+  // getCategories().then((list) => {
+  //   setCategoryList(list);
+  // });
   return (
     <div>
       <h3>Categorias:</h3>
