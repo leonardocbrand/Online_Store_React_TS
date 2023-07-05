@@ -22,7 +22,6 @@ function HomePage() {
 
     getData();
   };
-  // requisito 6
   return (
     <main>
       <form onSubmit={ handleSubmit }>
@@ -41,7 +40,7 @@ function HomePage() {
       >
         Carrinho
       </button>
-      <Categories />
+      <Categories setProducts={ setProducts } />
       <section>
         {
           products.length === 0
