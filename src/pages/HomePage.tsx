@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductsData } from '../types';
+import { useNavigate } from 'react-router-dom';
+import Categories from '../components/Categories';
 
 function HomePage() {
   const [searchInput, setSearchInput] = useState('');
   const [products, setProducts] = useState<ProductsData[]>([]);
+    
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('shopping-cart');
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +36,13 @@ function HomePage() {
         />
         <button data-testid="query-button" type="submit">Buscar</button>
       </form>
+      <button
+        onClick={ handleClick }
+        data-testid="shopping-cart-button"
+      >
+        Carrinho
+      </button>
+      <Categories />
       <section>
         {
           products.length === 0
