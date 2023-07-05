@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductsData } from '../types';
 
@@ -7,14 +7,17 @@ type Category = {
   name: string;
 };
 
-function Categories({ setProducts }) {
+type PropComponent = {
+  setProducts: React.Dispatch<React.SetStateAction<ProductsData[]>>;
+};
+
+function Categories({ setProducts }: PropComponent) {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   const handleClick = (name: string) => {
     const getData = async () => {
       const data = await getProductsFromCategoryAndQuery('', name);
       setProducts(data.results);
-      console.log('ok');
     };
     getData();
   };
@@ -33,7 +36,8 @@ function Categories({ setProducts }) {
             key={ item.id }
           >
             {item.name}
-        </button>);
+          </button>
+        );
       })}
     </div>
   );
