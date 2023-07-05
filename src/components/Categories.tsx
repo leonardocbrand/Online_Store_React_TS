@@ -22,16 +22,14 @@ function Categories({ setProducts }: PropComponent) {
     getData();
   };
 
-  const categorys = async () => {
-    const listCategory = await getCategories();
-    setCategoryList(listCategory);
-  };
   useEffect(() => {
+    const categorys = async () => {
+      const listCategory = await getCategories();
+      setCategoryList(listCategory);
+    };
     categorys();
   }, []);
-  // getCategories().then((list) => {
-  //   setCategoryList(list);
-  // });
+
   return (
     <div>
       <h3>Categorias:</h3>
