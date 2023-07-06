@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
 type SearchListProps = {
@@ -5,6 +6,25 @@ type SearchListProps = {
 };
 
 function SearchList({ products }: SearchListProps) {
+  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
+
+  const handleClickAddCar = (product: ProductsData) => {
+    const verifyProduct = itensCar.find((element) => element.id === product.id);
+    if (!verifyProduct) {
+      const newProduct = { ...product, quantidade: 1 };
+      setItensCar((prevState) => [...prevState, newProduct]);
+    } else {
+      verifyProduct.quantidade += 1;
+      const newlistCar = itensCar.filter((el) => el.id !== verifyProduct.id);
+      setItensCar([...newlistCar, verifyProduct]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(itensCar));
+  }, [itensCar]);
+
   return (
     <section>
       {
@@ -16,13 +36,19 @@ function SearchList({ products }: SearchListProps) {
           ) : (
             products.map((product: ProductsData) => (
               <div key={ product.id } data-testid="product">
-                <p>{product.title}</p>
+                <p>{ product.title }</p>
                 <img src={ product.thumbnail } alt="" />
-                <p>{`${product.currency_id} ${product.price}`}</p>
+                <p>{ `${product.currency_id} ${product.price}` }</p>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ () => handleClickAddCar(product) }
+                >
+                  Adicionar ao Carrinho
+                </button>
               </div>
             ))
           )
-        }
+      }
     </section>
   );
 }
