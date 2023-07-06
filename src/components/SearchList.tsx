@@ -46,12 +46,12 @@ function SearchList({ products }: SearchListProps) {
                   <img src={ product.thumbnail } alt="" />
                   <p>{ `${product.currency_id} ${product.price}` }</p>
                 </Link>
-                  <button
-                    data-testid="product-add-to-cart"
-                    onClick={ () => handleClickAddCar(product) }
-                  >
-                    Adicionar ao Carrinho
-                  </button>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ () => handleClickAddCar(product) }
+                >
+                  Adicionar ao Carrinho
+                </button>
               </div>
             ))
           )
