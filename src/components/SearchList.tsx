@@ -26,5 +26,5 @@ function SearchList({ products }: SearchListProps) {
     </section>
   );
 }
-
+// requisito 08
 export default SearchList;
