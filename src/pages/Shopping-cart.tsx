@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
-// function cartListProduct() {
-//   return (
-//     <div>
-//       <h1>{title}</h1>
-//     </div>
-//   )
-// }
-
 function ShoppingCart() {
   const [products, setProducts] = useState<ProductsData[]>([]);
 
