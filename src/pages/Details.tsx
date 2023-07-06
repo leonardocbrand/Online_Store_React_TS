@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProductById } from '../services/api';
-import { ProductsData } from '../types';
+import { ProductDetailsData } from '../types';
+import Attributes from '../components/Attributes';
 
-function DetailsPage() {
+function Details() {
   const navigate = useNavigate();
-  const [productInfo, setProductInfo] = useState({} as ProductsData);
+  const [productInfo, setProductInfo] = useState({} as ProductDetailsData);
   const { idDetails } = useParams();
   function handleClick() {
     navigate('/shopping-cart');
@@ -19,6 +20,7 @@ function DetailsPage() {
     }
     getProduct();
   }, []);
+
   return (
     <div>
       <button
@@ -31,7 +33,7 @@ function DetailsPage() {
       <p
         data-testid="product-detail-price"
       >
-        {` preço ${productInfo.currency_id} ${productInfo.price}`}
+        {` Preço: ${productInfo.currency_id} ${productInfo.price}`}
 
       </p>
       <img
@@ -39,14 +41,9 @@ function DetailsPage() {
         src={ productInfo.thumbnail }
         alt=""
       />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-        aliquid commodi libero consequatur corrupti eum. Nihil aut dolor
-        consectetur in. Illo veniam repellendus ea et dolore perferendis
-        recusandae nulla tempore.
-      </p>
+      <Attributes productInfo={ productInfo } />
     </div>
   );
 }
 
-export default DetailsPage;
+export default Details;
