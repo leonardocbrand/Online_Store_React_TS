@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ReviewsType = {
   email: string;
@@ -10,7 +10,14 @@ function Rating() {
   const [email, setEmail] = useState('');
   const [rate, setRate] = useState('');
   const [message, setMessage] = useState('');
-  const [reviews, setReviews] = useState<ReviewsType>();
+  const [reviews, setReviews] = useState<ReviewsType[]>([]);
+
+  useEffect(() => {
+    const oldReviews = JSON.parse(localStorage.getItem('reviews') ?? 'null');
+    if (oldReviews) {
+      setReviews(oldReviews);
+    }
+  }, []);
 
   const handleChangeEmail = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(target.value);
@@ -32,7 +39,14 @@ function Rating() {
       rating: rate,
     };
 
-    localStorage.setItem('reviews', JSON.stringify(Newreview));
+    setReviews([...reviews, Newreview]);
+
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+    setEmail('');
+    setRate('');
+    setMessage('');
+    const radio = document.getElementsByName('rate') as NodeListOf<HTMLInputElement>;
+    for (let i = 0; i < radio.length; i++) { radio[i].checked = false; }
   };
 
   return (
@@ -97,6 +111,7 @@ function Rating() {
           rows={ 5 }
           placeholder="Mensagem (Opcional)"
           onChange={ handleChangeMessage }
+          value={ message }
         />
         <button onClick={ handleSubmit }>Avaliar</button>
       </form>
