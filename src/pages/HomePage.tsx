@@ -5,6 +5,7 @@ import { ProductsData } from '../types';
 import Categories from '../components/Categories';
 import SearchList from '../components/SearchList';
 import Loading from '../components/Loading';
+import Rating from '../components/Rating';
 
 function HomePage() {
   const [searchInput, setSearchInput] = useState('');
@@ -47,6 +48,7 @@ function HomePage() {
       </button>
       <Categories setProducts={ setProducts } />
       {loading ? <Loading /> : <SearchList products={ products } /> }
+      <Rating />
     </main>
   );
 }
