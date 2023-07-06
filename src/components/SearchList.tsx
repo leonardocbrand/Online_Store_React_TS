@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
 type SearchListProps = {
@@ -5,9 +6,25 @@ type SearchListProps = {
 };
 
 function SearchList({ products }: SearchListProps) {
-  const handleClickAddCar = () => {
-  //  adicionar logica salvar item no local storage
+  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
+
+  const handleClickAddCar = (product: ProductsData) => {
+    const verifyProduct = itensCar.find((element) => element.id === product.id);
+    if (!verifyProduct) {
+      const newProduct = { ...product, quantidade: 1 };
+      setItensCar((prevState) => [...prevState, newProduct]);
+    } else {
+      verifyProduct.quantidade += 1;
+      const newlistCar = itensCar.filter((el) => el.id !== verifyProduct.id);
+      setItensCar([...newlistCar, verifyProduct]);
+    }
   };
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(itensCar));
+  }, [itensCar]);
+
   return (
     <section>
       {
@@ -24,7 +41,7 @@ function SearchList({ products }: SearchListProps) {
                 <p>{ `${product.currency_id} ${product.price}` }</p>
                 <button
                   data-testid="product-add-to-cart"
-                  onClick={ handleClickAddCar }
+                  onClick={ () => handleClickAddCar(product) }
                 >
                   Adicionar ao Carrinho
                 </button>
