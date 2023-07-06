@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
@@ -6,6 +7,7 @@ type SearchListProps = {
 };
 
 function SearchList({ products }: SearchListProps) {
+  const [productDetails, setProductDetails] = useState({});
   const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
 
@@ -36,9 +38,14 @@ function SearchList({ products }: SearchListProps) {
           ) : (
             products.map((product: ProductsData) => (
               <div key={ product.id } data-testid="product">
-                <p>{ product.title }</p>
-                <img src={ product.thumbnail } alt="" />
-                <p>{ `${product.currency_id} ${product.price}` }</p>
+                <Link
+                  data-testid="product-detail-link"
+                  to={ `/details/${product.id}` }
+                >
+                  <p>{ product.title }</p>
+                  <img src={ product.thumbnail } alt="" />
+                  <p>{ `${product.currency_id} ${product.price}` }</p>
+                </Link>
                 <button
                   data-testid="product-add-to-cart"
                   onClick={ () => handleClickAddCar(product) }
