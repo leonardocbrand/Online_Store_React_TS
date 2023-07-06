@@ -7,7 +7,6 @@ type SearchListProps = {
 };
 
 function SearchList({ products }: SearchListProps) {
-  const [productDetails, setProductDetails] = useState({});
   const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
   const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
 
