@@ -5,6 +5,9 @@ type SearchListProps = {
 };
 
 function SearchList({ products }: SearchListProps) {
+  const handleClickAddCar = () => {
+  //  adicionar logica salvar item no local storage
+  };
   return (
     <section>
       {
@@ -16,15 +19,21 @@ function SearchList({ products }: SearchListProps) {
           ) : (
             products.map((product: ProductsData) => (
               <div key={ product.id } data-testid="product">
-                <p>{product.title}</p>
+                <p>{ product.title }</p>
                 <img src={ product.thumbnail } alt="" />
-                <p>{`${product.currency_id} ${product.price}`}</p>
+                <p>{ `${product.currency_id} ${product.price}` }</p>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ handleClickAddCar }
+                >
+                  Adicionar ao Carrinho
+                </button>
               </div>
             ))
           )
-        }
+      }
     </section>
   );
 }
-// requisito 08
+
 export default SearchList;
