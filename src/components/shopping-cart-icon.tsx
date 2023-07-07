@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
-type PropCart = {
-  products: ProductsData[];
-};
-
-function ShoppingCartIcon({ products }: PropCart) {
+function ShoppingCartIcon() {
+  const quantidadeCarrinho = JSON.parse(localStorage.getItem('quantidadeCarrinho') || '');
   const [amountCart, setAmountCart] = useState(0);
 
   useEffect(() => {
@@ -16,9 +13,10 @@ function ShoppingCartIcon({ products }: PropCart) {
           return acumulador + produto.quantidade;
         }, 0);
       setAmountCart(quantityCart);
+      localStorage.setItem('quantidadeCarrinho', JSON.stringify(quantityCart));
     };
     getAmountCart();
-  }, [products]);
+  });
 
   return (
     <div>

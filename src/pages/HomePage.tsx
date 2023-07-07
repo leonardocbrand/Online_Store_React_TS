@@ -30,7 +30,7 @@ function HomePage() {
   };
   return (
     <main>
-      <ShoppingCartIcon products={ products } />
+      <ShoppingCartIcon />
       <form onSubmit={ handleSubmit }>
         <input
           type="text"
