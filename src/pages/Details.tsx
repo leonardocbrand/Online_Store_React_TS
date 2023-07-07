@@ -20,7 +20,7 @@ function Details() {
       }
     }
     getProduct();
-  }, []);
+  }, [idDetails]);
 
   return (
     <main>
