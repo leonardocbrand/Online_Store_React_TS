@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const INITIAL_STATE = {
   email: '',
@@ -6,11 +7,15 @@ const INITIAL_STATE = {
   rating: '',
 };
 
-const productId = 'reviews';
+type ParamsType = {
+  idDetails: string;
+};
 
 function Rating() {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isInvalid, setIsInvalid] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const { idDetails } = useParams<keyof ParamsType>() as ParamsType;
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
@@ -27,17 +32,22 @@ function Rating() {
       return;
     }
 
-    if (localStorage.getItem(productId)) {
-      const arrayReviews = JSON.parse(localStorage.getItem(productId) as string);
-      localStorage.setItem(productId, JSON.stringify([...arrayReviews, formData]));
+    if (localStorage.getItem(idDetails)) {
+      const arrayReviews = JSON.parse(localStorage.getItem(idDetails) ?? '[]');
+      localStorage.setItem(idDetails, JSON.stringify([...arrayReviews, formData]));
     } else {
-      localStorage.setItem(productId, JSON.stringify([formData]));
+      localStorage.setItem(idDetails, JSON.stringify([formData]));
     }
+
     setIsInvalid(false);
     setFormData(INITIAL_STATE);
   };
 
-  const reviews = JSON.parse(localStorage.getItem(productId) as string);
+  useEffect(() => {
+    if (idDetails) {
+      setReviews(JSON.parse(localStorage.getItem(idDetails) ?? '[]'));
+    }
+  }, [idDetails, reviews]);
 
   return (
     <div>
@@ -116,7 +126,7 @@ function Rating() {
         />
         <button data-testid="submit-review-btn" onClick={ handleSubmit }>Avaliar</button>
       </form>
-      {(reviews)
+      {(reviews.length > 0)
       && (
         <div>
           {reviews.map((item : { email:string; rating:string; message:string; }) => {
