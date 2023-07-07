@@ -4,6 +4,7 @@ import { getProductById } from '../services/api';
 import { ProductDetailsData } from '../types';
 import Attributes from '../components/Attributes';
 import Loading from '../components/Loading';
+import Rating from '../components/Rating';
 
 function Details() {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ function Details() {
           >
             Adicionar ao carrinho
           </button>
+          <Rating />
         </div>
       ) : (
         <Loading />
