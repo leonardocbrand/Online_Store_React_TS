@@ -3,7 +3,7 @@ import { ProductsData } from '../types';
 
 function ShoppingCartIcon() {
   const quantidadeCarrinho = JSON.parse(localStorage.getItem('quantidadeCarrinho') || '');
-  const [amountCart, setAmountCart] = useState(0);
+  const [amountCart, setAmountCart] = useState(quantidadeCarrinho);
 
   useEffect(() => {
     const getAmountCart = () => {
@@ -13,7 +13,7 @@ function ShoppingCartIcon() {
           return acumulador + produto.quantidade;
         }, 0);
       setAmountCart(quantityCart);
-      localStorage.setItem('quantidadeCarrinho', JSON.stringify(quantityCart));
+      localStorage.setItem('quantidadeCarrinho', JSON.stringify(amountCart));
     };
     getAmountCart();
   });
