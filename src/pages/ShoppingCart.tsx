@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ProductsData } from '../types';
 
 function ShoppingCart() {
@@ -15,7 +16,7 @@ function ShoppingCart() {
     localStorage.setItem('cart', JSON.stringify(products));
   }, [products]);
 
-  function handleClickAumenta(id: string) {
+  function handleIncrease(id: string) {
     const product = products.find((e) => e.id === id);
     if (product) {
       const newObject = { ...product, quantidade: product.quantidade + 1 };
@@ -24,7 +25,7 @@ function ShoppingCart() {
     }
   }
 
-  function handleClickDiminui(id: string) {
+  function handleDecrease(id: string) {
     const product = products.find((e) => e.id === id);
     if (product && product.quantidade > 1) {
       const newObject = { ...product, quantidade: product.quantidade - 1 };
@@ -33,8 +34,8 @@ function ShoppingCart() {
     }
   }
 
-  function handleClickExcluir(id: string) {
-    const newList = products.filter((el) => el.id !== id);
+  function handleDelete(id: string) {
+    const newList = products.filter((product) => product.id !== id);
     setProducts(newList);
   }
 
@@ -54,21 +55,21 @@ function ShoppingCart() {
             <p>{element.price}</p>
             <p data-testid="shopping-cart-product-quantity">{element.quantidade}</p>
             <button
-              onClick={ () => handleClickAumenta(element.id) }
+              onClick={ () => handleIncrease(element.id) }
               data-testid="product-increase-quantity"
             >
               +
 
             </button>
             <button
-              onClick={ () => handleClickDiminui(element.id) }
+              onClick={ () => handleDecrease(element.id) }
               data-testid="product-decrease-quantity"
             >
               -
 
             </button>
             <button
-              onClick={ () => handleClickExcluir(element.id) }
+              onClick={ () => handleDelete(element.id) }
               data-testid="remove-product"
             >
               X
@@ -77,6 +78,9 @@ function ShoppingCart() {
           </div>
         ))
       )}
+      <Link to="/checkout">
+        <button data-testid="checkout-products">Finalizar compra</button>
+      </Link>
     </main>
   );
 }
