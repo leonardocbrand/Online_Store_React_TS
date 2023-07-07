@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const INITIAL_STATE = {
   email: '',
   message: '',
   rating: '',
+};
+
+type ReviewType = {
+  email: string;
+  message: string;
+  rating: string;
 };
 
 type ParamsType = {
@@ -14,8 +20,9 @@ type ParamsType = {
 function Rating() {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isInvalid, setIsInvalid] = useState(false);
-  const [reviews, setReviews] = useState([]);
   const { idDetails } = useParams<keyof ParamsType>() as ParamsType;
+  const [reviews, setReviews] = useState<ReviewType[]>(JSON
+    .parse(localStorage.getItem(idDetails) ?? '[]'));
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
@@ -41,13 +48,8 @@ function Rating() {
 
     setIsInvalid(false);
     setFormData(INITIAL_STATE);
+    setReviews(JSON.parse(localStorage.getItem(idDetails) ?? '[]'));
   };
-
-  useEffect(() => {
-    if (idDetails) {
-      setReviews(JSON.parse(localStorage.getItem(idDetails) ?? '[]'));
-    }
-  }, [idDetails, reviews]);
 
   return (
     <div>
