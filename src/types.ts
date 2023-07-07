@@ -22,3 +22,13 @@ export type ProductDetailsData = {
   price: number;
   attributes: Attributes[]
 };
+
+export type FormData = {
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  zipcode: string;
+  address: string;
+  payment: string;
+};

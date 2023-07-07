@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import { ProductDetailsData } from '../types';
 import Attributes from '../components/Attributes';
+import Loading from '../components/Loading';
 
 function Details() {
   const navigate = useNavigate();
@@ -22,27 +23,32 @@ function Details() {
   }, []);
 
   return (
-    <div>
-      <button
-        data-testid="shopping-cart-button"
-        onClick={ handleClick }
-      >
-        Carrinho
-      </button>
-      <p data-testid="product-detail-name">{productInfo.title}</p>
-      <p
-        data-testid="product-detail-price"
-      >
-        {` Preço: ${productInfo.currency_id} ${productInfo.price}`}
-
-      </p>
-      <img
-        data-testid="product-detail-image"
-        src={ productInfo.thumbnail }
-        alt=""
-      />
-      <Attributes productInfo={ productInfo } />
-    </div>
+    <main>
+      {productInfo.attributes ? (
+        <div>
+          <button
+            data-testid="shopping-cart-button"
+            onClick={ handleClick }
+          >
+            Carrinho
+          </button>
+          <p data-testid="product-detail-name">{productInfo.title}</p>
+          <p
+            data-testid="product-detail-price"
+          >
+            {` Preço: ${productInfo.currency_id} ${productInfo.price}`}
+          </p>
+          <img
+            data-testid="product-detail-image"
+            src={ productInfo.thumbnail }
+            alt=""
+          />
+          <Attributes productInfo={ productInfo } />
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </main>
   );
 }
 
