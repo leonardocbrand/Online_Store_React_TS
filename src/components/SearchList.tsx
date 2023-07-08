@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ProductsData } from '../types';
-import ShoppingCartIcon from './ShoppingCartIcon';
 
 type SearchListProps = {
   products: ProductsData[];
+  itensCar: ProductsData[];
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
 };
 
-function SearchList({ products }: SearchListProps) {
-  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
-  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
-
+function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
   const handleClickAddCar = (product: ProductsData) => {
     const verifyProduct = itensCar.find((element) => element.id === product.id);
     if (!verifyProduct) {
@@ -29,7 +27,6 @@ function SearchList({ products }: SearchListProps) {
 
   return (
     <section>
-      <ShoppingCartIcon itensCar={ itensCar } />
       {
         products.length === 0
           ? (

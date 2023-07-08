@@ -6,7 +6,8 @@ type PropsIconCart = {
 };
 
 function ShoppingCartIcon({ itensCar }: PropsIconCart) {
-  const [amountCart, setAmountCart] = useState(0);
+  const qtdCarrinho = JSON.parse(localStorage.getItem('qtdCarrinho') || '0');
+  const [amountCart, setAmountCart] = useState(qtdCarrinho);
 
   useEffect(() => {
     const setAmountIcon = () => {
