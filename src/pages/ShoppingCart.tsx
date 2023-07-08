@@ -18,7 +18,7 @@ function ShoppingCart() {
 
   function handleIncrease(id: string) {
     const product = products.find((e) => e.id === id);
-    if (product) {
+    if (product && product.quantidade < product.available_quantity) {
       const newObject = { ...product, quantidade: product.quantidade + 1 };
       const newList = products.map((el) => (el.id !== product.id ? el : newObject));
       setProducts(newList);
