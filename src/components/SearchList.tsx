@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
+import ShoppingCartIcon from './ShoppingCartIcon';
 
 type SearchListProps = {
   products: ProductsData[];
@@ -28,6 +29,7 @@ function SearchList({ products }: SearchListProps) {
 
   return (
     <section>
+      <ShoppingCartIcon itensCar={ itensCar } />
       {
         products.length === 0
           ? (
@@ -41,9 +43,9 @@ function SearchList({ products }: SearchListProps) {
                   data-testid="product-detail-link"
                   to={ `/details/${product.id}` }
                 >
-                  <p>{ product.title }</p>
+                  <p>{product.title}</p>
                   <img src={ product.thumbnail } alt="" />
-                  <p>{ `${product.currency_id} ${product.price}` }</p>
+                  <p>{`${product.currency_id} ${product.price}`}</p>
                 </Link>
                 <button
                   data-testid="product-add-to-cart"

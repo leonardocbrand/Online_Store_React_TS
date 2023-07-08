@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
-function ShoppingCartIcon() {
-  const quantidadeCarrinho = JSON.parse(localStorage.getItem('quantidadeCarrinho') || '');
-  const [amountCart, setAmountCart] = useState(quantidadeCarrinho);
+type PropsIconCart = {
+  itensCar: ProductsData[];
+};
+
+function ShoppingCartIcon({ itensCar }: PropsIconCart) {
+  const [amountCart, setAmountCart] = useState(0);
 
   useEffect(() => {
-    const getAmountCart = () => {
-      const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
-      const quantityCart = cartLocalStorage
-        .reduce((acumulador: number, produto:ProductsData) => {
+    const setAmountIcon = () => {
+      const quantityCart = itensCar
+        .reduce((acumulador: number, produto: ProductsData) => {
           return acumulador + produto.quantidade;
         }, 0);
+      localStorage.setItem('qtdCarrinho', JSON.stringify(quantityCart));
       setAmountCart(quantityCart);
-      localStorage.setItem('quantidadeCarrinho', JSON.stringify(amountCart));
     };
-    getAmountCart();
-  });
+    setAmountIcon();
+  }, [itensCar]);
 
   return (
     <div>

@@ -5,7 +5,6 @@ import { ProductsData } from '../types';
 import Categories from '../components/Categories';
 import SearchList from '../components/SearchList';
 import Loading from '../components/Loading';
-import ShoppingCartIcon from '../components/shopping-cart-icon';
 
 function HomePage() {
   const [searchInput, setSearchInput] = useState('');
@@ -30,7 +29,6 @@ function HomePage() {
   };
   return (
     <main>
-      <ShoppingCartIcon />
       <form onSubmit={ handleSubmit }>
         <input
           type="text"
