@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 
 type SearchListProps = {
   products: ProductsData[];
-  itensCar: ProductsData[];
-  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
 };
 
-function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
+function SearchList({ products }: SearchListProps) {
+  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
+
   const handleClickAddCar = (product: ProductsData) => {
     const verifyProduct = itensCar.find((element) => element.id === product.id);
     if (!verifyProduct) {
@@ -40,9 +41,9 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
                   data-testid="product-detail-link"
                   to={ `/details/${product.id}` }
                 >
-                  <p>{product.title}</p>
+                  <p>{ product.title }</p>
                   <img src={ product.thumbnail } alt="" />
-                  <p>{`${product.currency_id} ${product.price}`}</p>
+                  <p>{ `${product.currency_id} ${product.price}` }</p>
                 </Link>
                 <button
                   data-testid="product-add-to-cart"
