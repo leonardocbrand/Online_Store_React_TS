@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProductById } from '../services/api';
-import { ProductDetailsData, ProductsData } from '../types';
+import { ProductDetailsData } from '../types';
 import Attributes from '../components/Attributes';
 import Loading from '../components/Loading';
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
 import Rating from '../components/Rating';
 
-type PropsDetailsIten = {
-  itensCar: ProductsData[]
-};
-
-function Details({ itensCar }: PropsDetailsIten) {
+function Details() {
   const navigate = useNavigate();
   const [productInfo, setProductInfo] = useState({} as ProductDetailsData);
   const { idDetails } = useParams();
@@ -49,7 +44,6 @@ function Details({ itensCar }: PropsDetailsIten) {
 
   return (
     <main>
-      <ShoppingCartIcon itensCar={ itensCar } />
       {productInfo.attributes ? (
         <div>
           <button
