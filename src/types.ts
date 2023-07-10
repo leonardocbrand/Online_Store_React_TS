@@ -6,6 +6,9 @@ export type ProductsData = {
   currency_id: string;
   price: number;
   available_quantity: number
+  shipping: {
+    free_shipping: boolean;
+  }
 };
 
 type Attributes = {
@@ -21,7 +24,10 @@ export type ProductDetailsData = {
   thumbnail: string;
   currency_id: string;
   price: number;
-  attributes: Attributes[]
+  shipping: {
+    free_shipping: boolean;
+  };
+  attributes: Attributes[];
 };
 
 export type FormData = {

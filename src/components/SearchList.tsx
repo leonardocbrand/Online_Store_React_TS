@@ -44,6 +44,11 @@ function SearchList({ products }: SearchListProps) {
                   <p>{ product.title }</p>
                   <img src={ product.thumbnail } alt="" />
                   <p>{ `${product.currency_id} ${product.price}` }</p>
+                  {product.shipping.free_shipping ? (
+                    <p data-testid="free-shipping">Frete grátis!</p>
+                  ) : (
+                    null
+                  )}
                 </Link>
                 <button
                   data-testid="product-add-to-cart"

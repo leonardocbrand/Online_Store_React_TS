@@ -58,6 +58,8 @@ function Details() {
           >
             {` Preço: ${productInfo.currency_id} ${productInfo.price}`}
           </p>
+          {productInfo.shipping.free_shipping
+          && <p data-testid="free-shipping">Frete grátis!</p>}
           <img
             data-testid="product-detail-image"
             src={ productInfo.thumbnail }
