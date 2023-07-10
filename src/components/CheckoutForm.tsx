@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormData } from '../types';
+import { FormData, ProductsData } from '../types';
 
-function CheckoutForm() {
+type CheckoutFormProps = {
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
+};
+
+function CheckoutForm({ setItensCar }: CheckoutFormProps) {
   const [userData, setUserData] = useState<FormData>(
     {
       name: '',
@@ -33,7 +37,7 @@ function CheckoutForm() {
     const hasEmptyValues = values.some((value) => value.length === 0);
 
     if (values.length === 7 && !hasEmptyValues) {
-      localStorage.setItem('cart', '[]');
+      setItensCar([]);
       navigate('/');
     } else {
       setErrorMsg(true);
