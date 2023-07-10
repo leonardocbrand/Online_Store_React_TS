@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import { ShoppingCart } from '@mui/icons-material';
 import { ProductsData } from '../types';
 
 type PropsIconCart = {
@@ -22,14 +24,10 @@ function ShoppingCartIcon({ itensCar }: PropsIconCart) {
   }, [itensCar]);
 
   return (
-    <div>
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/019/787/018/original/shopping-cart-icon-shopping-basket-on-transparent-background-free-png.png"
-        alt="cart icon"
-        width="50px"
-      />
-      <p data-testid="shopping-cart-size">{amountCart}</p>
-    </div>
+    <Box display="flex" alignItems="center">
+      <Typography variant="h6" data-testid="shopping-cart-size">{amountCart}</Typography>
+      <ShoppingCart />
+    </Box>
   );
 }
 

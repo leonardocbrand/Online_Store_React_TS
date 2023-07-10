@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Divider, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductsData } from '../types';
 
@@ -31,20 +32,30 @@ function Categories({ setProducts }: PropComponent) {
   }, []);
 
   return (
-    <div>
-      <h3>Categorias:</h3>
-      {categoryList.map((item) => {
-        return (
-          <button
-            onClick={ () => handleClick(item.name) }
-            data-testid="category"
-            key={ item.id }
-          >
-            {item.name}
-          </button>
-        );
-      })}
-    </div>
+    <Stack
+      spacing={ 2 }
+      justifyContent="center"
+      p={ 3 }
+      component="section"
+    >
+      <Typography variant="h6" fontWeight="700">Categorias</Typography>
+      <Divider />
+      <List sx={ { overflowY: 'auto' } }>
+        {categoryList.map((item) => {
+          return (
+            <ListItem
+              button
+              divider
+              onClick={ () => handleClick(item.name) }
+              data-testid="category"
+              key={ item.id }
+            >
+              <ListItemText primary={ item.name } />
+            </ListItem>
+          );
+        })}
+      </List>
+    </Stack>
   );
 }
 

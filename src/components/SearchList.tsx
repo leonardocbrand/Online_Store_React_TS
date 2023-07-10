@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { Box, Typography } from '@mui/material';
 import { ProductsData } from '../types';
 
 type SearchListProps = {
@@ -26,13 +27,28 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
   }, [itensCar]);
 
   return (
-    <section>
+    <Box
+      display="flex"
+      justifyContent="center"
+      flexGrow={ 1 }
+      alignItems="center"
+    >
       {
         products.length === 0
           ? (
-            <h2 data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </h2>
+            <Box display="flex" flexDirection="column" width="351px">
+              <Typography color="#31C28D" variant="h5" fontWeight={ 700 }>
+                VOCÊ AINDA NÃO REALIZOU UMA BUSCA
+              </Typography>
+
+              <Typography
+                color="#94979D"
+                variant="subtitle1"
+                data-testid="home-initial-message"
+              >
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </Typography>
+            </Box>
           ) : (
             products.map((product: ProductsData) => (
               <div key={ product.id } data-testid="product">
@@ -59,7 +75,7 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
             ))
           )
       }
-    </section>
+    </Box>
   );
 }
 
