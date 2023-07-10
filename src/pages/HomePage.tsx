@@ -5,8 +5,14 @@ import { ProductsData } from '../types';
 import Categories from '../components/Categories';
 import SearchList from '../components/SearchList';
 import Loading from '../components/Loading';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
-function HomePage() {
+type PropsHomePage = {
+  itensCar: ProductsData[];
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
+};
+
+function HomePage({ itensCar, setItensCar }: PropsHomePage) {
   const [searchInput, setSearchInput] = useState('');
   const [products, setProducts] = useState<ProductsData[]>([]);
   const [loading, setLoading] = useState(false);
@@ -45,8 +51,13 @@ function HomePage() {
       >
         Carrinho
       </button>
+      <ShoppingCartIcon itensCar={ itensCar } />
       <Categories setProducts={ setProducts } />
-      {loading ? <Loading /> : <SearchList products={ products } /> }
+      {loading ? <Loading /> : <SearchList
+        products={ products }
+        itensCar={ itensCar }
+        setItensCar={ setItensCar }
+      /> }
     </main>
   );
 }

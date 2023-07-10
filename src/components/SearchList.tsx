@@ -4,12 +4,11 @@ import { ProductsData } from '../types';
 
 type SearchListProps = {
   products: ProductsData[];
+  itensCar: ProductsData[];
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
 };
 
-function SearchList({ products }: SearchListProps) {
-  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
-  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
-
+function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
   const handleClickAddCar = (product: ProductsData) => {
     const verifyProduct = itensCar.find((element) => element.id === product.id);
     if (!verifyProduct) {

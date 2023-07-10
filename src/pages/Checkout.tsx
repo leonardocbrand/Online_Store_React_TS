@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { ProductsData } from '../types';
 import CheckoutForm from '../components/CheckoutForm';
 
-function Checkout() {
+type CheckoutProps = {
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
+};
+
+function Checkout({ setItensCar }: CheckoutProps) {
   const [products, setProducts] = useState<ProductsData[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>();
 
@@ -34,7 +38,7 @@ function Checkout() {
         ))}
         <h4>{`Total: R$ ${totalPrice}`}</h4>
       </section>
-      <CheckoutForm />
+      <CheckoutForm setItensCar={ setItensCar } />
     </main>
   );
 }
