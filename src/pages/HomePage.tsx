@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { ProductsData } from '../types';
 import Categories from '../components/Categories';
 import SearchList from '../components/SearchList';
@@ -22,7 +22,7 @@ function HomePage({ itensCar, setItensCar }: PropsHomePage) {
         setLoading={ setLoading }
         setProducts={ setProducts }
       />
-      <Container component="main" sx={ { display: 'flex', pt: 9, minHeight: '100vh' } }>
+      <Box component="main" sx={ { display: 'flex', pt: 9, maxHeight: '100vh' } }>
         <Categories setProducts={ setProducts } />
         <Box
           display="flex"
@@ -36,7 +36,7 @@ function HomePage({ itensCar, setItensCar }: PropsHomePage) {
           /> }
         </Box>
 
-      </Container>
+      </Box>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { ProductsData } from '../types';
 
 type SearchListProps = {
@@ -50,29 +50,46 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
               </Typography>
             </Box>
           ) : (
-            products.map((product: ProductsData) => (
-              <div key={ product.id } data-testid="product">
-                <Link
-                  data-testid="product-detail-link"
-                  to={ `/details/${product.id}` }
+            <Grid
+              container
+              rowSpacing={ { xs: 4, sm: 5 } }
+              columnSpacing={ { xs: 1, sm: 2, md: 3 } }
+              p={ 8 }
+              width="100%"
+              maxHeight="90vh"
+              overflow="auto"
+            >
+              {products.map((product: ProductsData) => (
+                <Grid
+                  key={ product.id }
+                  item
+                  xs={ 12 }
+                  sm={ 6 }
+                  md={ 3 }
+                  data-testid="product"
                 >
-                  <p>{ product.title }</p>
-                  <img src={ product.thumbnail } alt="" />
-                  <p>{ `${product.currency_id} ${product.price}` }</p>
-                  {product.shipping.free_shipping ? (
-                    <p data-testid="free-shipping">Frete grátis!</p>
-                  ) : (
-                    null
-                  )}
-                </Link>
-                <button
-                  data-testid="product-add-to-cart"
-                  onClick={ () => handleClickAddCar(product) }
-                >
-                  Adicionar ao Carrinho
-                </button>
-              </div>
-            ))
+                  <Link
+                    data-testid="product-detail-link"
+                    to={ `/details/${product.id}` }
+                  >
+                    <img src={ product.thumbnail } alt={ product.title } />
+                    <p>{ product.title }</p>
+                    <p>{ `${product.currency_id} ${product.price}` }</p>
+                    {product.shipping.free_shipping ? (
+                      <p data-testid="free-shipping">Frete grátis!</p>
+                    ) : (
+                      null
+                    )}
+                  </Link>
+                  <button
+                    data-testid="product-add-to-cart"
+                    onClick={ () => handleClickAddCar(product) }
+                  >
+                    Adicionar ao Carrinho
+                  </button>
+                </Grid>
+              ))}
+            </Grid>
           )
       }
     </Box>
