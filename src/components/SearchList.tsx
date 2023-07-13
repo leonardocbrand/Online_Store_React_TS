@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { ProductsData } from '../types';
+import ItemCard from './ItemCard';
 
 type SearchListProps = {
   products: ProductsData[];
@@ -68,25 +69,10 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
                   md={ 3 }
                   data-testid="product"
                 >
-                  <Link
-                    data-testid="product-detail-link"
-                    to={ `/details/${product.id}` }
-                  >
-                    <img src={ product.thumbnail } alt={ product.title } />
-                    <p>{ product.title }</p>
-                    <p>{ `${product.currency_id} ${product.price}` }</p>
-                    {product.shipping.free_shipping ? (
-                      <p data-testid="free-shipping">Frete grátis!</p>
-                    ) : (
-                      null
-                    )}
-                  </Link>
-                  <button
-                    data-testid="product-add-to-cart"
+                  <ItemCard
+                    product={ product }
                     onClick={ () => handleClickAddCar(product) }
-                  >
-                    Adicionar ao Carrinho
-                  </button>
+                  />
                 </Grid>
               ))}
             </Grid>

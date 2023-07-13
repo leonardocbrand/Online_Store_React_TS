@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Box, IconButton, InputBase, Paper, Typography } from '@mui/material';
+import { AppBar, IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import StorefrontIcon from '@mui/icons-material/Storefront';
 import { ProductsData } from '../types';
 import ShoppingCartIcon from './ShoppingCartIcon';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import logo from '../images/logo.svg';
+import { StyledImg } from './styles/StyledImg';
 
 type HeaderProps = {
   itensCar: ProductsData[];
@@ -16,7 +17,6 @@ type HeaderProps = {
 function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
-
   const handleClick = () => {
     navigate('shopping-cart');
   };
@@ -73,23 +73,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
           <SearchIcon sx={ { fill: '#2FC18C' } } />
         </IconButton>
       </Paper>
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <StorefrontIcon sx={ { height: '30px', width: '30px' } } />
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          p={ 1 }
-        >
-          <Typography fontWeight="700" variant="h1" fontSize={ 20 }>
-            FRONT-END
-          </Typography>
-          <Typography variant="subtitle1">
-            online store
-          </Typography>
-        </Box>
-      </Box>
+      <StyledImg src={ logo } alt="" />
       <IconButton
         onClick={ handleClick }
         data-testid="shopping-cart-button"

@@ -22,11 +22,12 @@ function HomePage({ itensCar, setItensCar }: PropsHomePage) {
         setLoading={ setLoading }
         setProducts={ setProducts }
       />
-      <Box component="main" sx={ { display: 'flex', pt: 9, maxHeight: '100vh' } }>
+      <Box component="main" sx={ { display: 'flex', pt: 6, maxHeight: '100vh' } }>
         <Categories setProducts={ setProducts } />
         <Box
           display="flex"
           justifyContent="center"
+          alignItems="center"
           sx={ { backgroundColor: '#F5F5F5', width: '100%' } }
         >
           {loading ? <Loading /> : <SearchList
