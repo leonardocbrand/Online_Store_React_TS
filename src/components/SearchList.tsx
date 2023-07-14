@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { ProductsData } from '../types';
@@ -37,7 +36,11 @@ function SearchList({ products, itensCar, setItensCar }: SearchListProps) {
       {
         products.length === 0
           ? (
-            <Box display="flex" flexDirection="column" width="351px">
+            <Box
+              display="flex"
+              flexDirection="column"
+              sx={ { width: { xs: 200, md: 350 } } }
+            >
               <Typography color="#31C28D" variant="h5" fontWeight={ 700 }>
                 VOCÊ AINDA NÃO REALIZOU UMA BUSCA
               </Typography>
