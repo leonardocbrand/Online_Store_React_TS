@@ -25,7 +25,21 @@ function ShoppingCartIcon({ itensCar }: PropsIconCart) {
 
   return (
     <Box display="flex" alignItems="center">
-      <Typography variant="h6" data-testid="shopping-cart-size">{amountCart}</Typography>
+      <span
+        style={ {
+          backgroundColor: '#2FC18C',
+          color: 'white',
+          borderRadius: '100px',
+          width: '1rem',
+          height: '1rem',
+          fontSize: '14px',
+          position: 'absolute',
+          transform: 'translate(90%, -70%)',
+        } }
+      >
+        {amountCart}
+
+      </span>
       <ShoppingCart />
     </Box>
   );

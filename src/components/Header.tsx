@@ -37,7 +37,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   };
 
   return (
-    <AppBar sx={ { p: { xs: '10px 0 0 0' } } }>
+    <AppBar sx={ { p: { xs: '8px 0 0 0' } } }>
       <Toolbar sx={ { justifyContent: 'space-between' } }>
         <Paper
           component="form"
