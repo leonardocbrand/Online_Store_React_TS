@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppBar,
   IconButton, InputBase, Paper, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -20,6 +20,8 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+  const { pathname } = useLocation();
+
   const handleClick = () => {
     navigate('shopping-cart');
   };
@@ -39,43 +41,44 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   return (
     <AppBar sx={ { p: { xs: '8px 0 0 0' } } }>
       <Toolbar sx={ { justifyContent: 'space-between' } }>
-        <Paper
-          component="form"
-          onSubmit={ handleSubmit }
-          sx={ {
-            p: '2px 4px',
-            display: 'flex',
-            alignItems: 'center',
-            width: { xs: 120, sm: 230 },
-            height: { xs: 30, sm: 35 },
-          } }
-        >
-          <InputBase
+        {pathname === '/' && (
+          <Paper
+            component="form"
+            onSubmit={ handleSubmit }
             sx={ {
-              '& input::placeholder': { fontSize: { xs: '12px', sm: '14px' } },
-              p: 1,
+              p: '2px 4px',
+              display: 'flex',
+              alignItems: 'center',
+              width: { xs: 120, sm: 230 },
+              height: { xs: 30, sm: 35 },
             } }
-            placeholder="Buscar produto"
-            autoComplete="off"
-            inputProps={ { 'aria-label': 'search product' } }
-            type="text"
-            name="search"
-            data-testid="query-input"
-            value={ searchInput }
-            onChange={ (e) => setSearchInput(e.target.value) }
-          />
-          {isMatch ? (
-            null
-          ) : (
-            <IconButton
-              type="submit"
-              sx={ { p: '10px' } }
-              aria-label="search"
-              data-testid="query-button"
-            >
-              <SearchIcon sx={ { fill: '#2FC18C' } } />
-            </IconButton>)}
-        </Paper>
+          >
+            <InputBase
+              sx={ {
+                '& input::placeholder': { fontSize: { xs: '12px', sm: '14px' } },
+                p: 1,
+              } }
+              placeholder="Buscar produto"
+              autoComplete="off"
+              inputProps={ { 'aria-label': 'search product' } }
+              type="text"
+              name="search"
+              data-testid="query-input"
+              value={ searchInput }
+              onChange={ (e) => setSearchInput(e.target.value) }
+            />
+            {isMatch ? (
+              null
+            ) : (
+              <IconButton
+                type="submit"
+                sx={ { p: '10px' } }
+                aria-label="search"
+                data-testid="query-button"
+              >
+                <SearchIcon sx={ { fill: '#2FC18C' } } />
+              </IconButton>)}
+          </Paper>)}
         <StyledImg src={ logo } alt="" />
         <IconButton
           onClick={ handleClick }

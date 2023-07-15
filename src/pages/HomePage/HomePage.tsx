@@ -22,7 +22,7 @@ function HomePage({ itensCar, setItensCar }: PropsHomePage) {
         setLoading={ setLoading }
         setProducts={ setProducts }
       />
-      <Box component="main" sx={ { display: 'flex', pt: 6, height: '100vh' } }>
+      <Box component="main" sx={ { display: 'flex', pt: 7, height: '100vh' } }>
         <Categories setProducts={ setProducts } setLoading={ setLoading } />
         <Box
           display="flex"
