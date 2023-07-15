@@ -109,6 +109,47 @@ function ShoppingCart() {
                       {element.title}
 
                     </Typography>
+                    <Box
+                      ml={ 1 }
+                      mr={ 1 }
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <IconButton
+                        onClick={ () => handleDecrease(element.id) }
+                        data-testid="product-decrease-quantity"
+                        sx={ { p: 0 } }
+                      >
+                        <Remove />
+                      </IconButton>
+                      <span
+                        style={ {
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '100px',
+                          backgroundColor: '#B0B3BB',
+                        } }
+                      >
+                        <Typography
+                          data-testid="shopping-cart-product-quantity"
+                          fontSize={ 20 }
+                          color="#ffff"
+                          sx={ {
+                            fontSize: 14,
+                            position: 'absolute',
+                            transform: 'translate(60%, -5%)' } }
+                        >
+                          {element.quantidade}
+                        </Typography>
+                      </span>
+                      <IconButton
+                        onClick={ () => handleIncrease(element.id) }
+                        data-testid="product-increase-quantity"
+                        sx={ { p: 0 } }
+                      >
+                        <Add />
+                      </IconButton>
+                    </Box>
                     <Typography
                       sx={ { fontSize: { xs: 13, sm: 15 } } }
                       fontWeight={ 600 }
@@ -118,29 +159,6 @@ function ShoppingCart() {
                       {`R$${element.price}`}
 
                     </Typography>
-                    <IconButton
-                      onClick={ () => handleDecrease(element.id) }
-                      data-testid="product-decrease-quantity"
-                      sx={ { p: 0 } }
-                    >
-                      <Remove />
-                    </IconButton>
-                    <Typography
-                      data-testid="shopping-cart-product-quantity"
-                      fontSize={ 20 }
-                      color="#B0B3BB"
-                      sx={ { fontSize: { xs: 13, sm: 16 } } }
-                    >
-                      {element.quantidade}
-
-                    </Typography>
-                    <IconButton
-                      onClick={ () => handleIncrease(element.id) }
-                      data-testid="product-increase-quantity"
-                      sx={ { p: 0 } }
-                    >
-                      <Add />
-                    </IconButton>
                   </Box>
                   <Divider />
                 </>
