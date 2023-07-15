@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getProductById } from '../services/api';
-import { ProductDetailsData, ProductsData } from '../types';
-import Attributes from '../components/Attributes';
-import Loading from '../components/Loading';
-import Rating from '../components/Rating';
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
+import { getProductById } from '../../services/api';
+import { ProductDetailsData, ProductsData } from '../../types';
+import Attributes from '../../components/Attributes';
+import Loading from '../../components/Loading';
+import Rating from '../../components/Rating';
+import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 
 type PropsDetailsIten = {
   itensCar: ProductsData[]

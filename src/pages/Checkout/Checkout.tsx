@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ProductsData } from '../types';
-import CheckoutForm from '../components/CheckoutForm';
+import { ProductsData } from '../../types';
+import CheckoutForm from '../../components/CheckoutForm';
 
 type CheckoutProps = {
   setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>

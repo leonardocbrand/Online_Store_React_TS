@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-import HomePage from '../pages/HomePage';
-import ShoppingCart from '../pages/ShoppingCart';
-import Details from '../pages/Details';
-import Checkout from '../pages/Checkout';
+import { ShoppingCart } from '../pages/ShoppingCart';
 import { ProductsData } from '../types';
+import { Checkout } from '../pages/Checkout';
+import { Details } from '../pages/Details';
+import { HomePage } from '../pages/HomePage';
 
 function Router() {
   const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');

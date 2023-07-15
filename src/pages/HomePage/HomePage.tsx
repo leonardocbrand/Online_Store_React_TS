@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-import { ProductsData } from '../types';
-import Categories from '../components/Categories';
-import SearchList from '../components/SearchList';
-import Loading from '../components/Loading';
-import Header from '../components/Header';
+import { ProductsData } from '../../types';
+import Categories from '../../components/Categories';
+import SearchList from '../../components/SearchList';
+import Loading from '../../components/Loading';
+import Header from '../../components/Header';
 
 type PropsHomePage = {
   itensCar: ProductsData[];
