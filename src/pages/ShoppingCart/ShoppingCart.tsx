@@ -88,7 +88,7 @@ function ShoppingCart() {
               {products.map((element) => (
                 <>
                   <Box
-                    key={ element.id }
+                    key={ element.id + element.thumbnail }
                     display="flex"
                     alignItems="Center"
                     p={ 2 }
@@ -103,7 +103,11 @@ function ShoppingCart() {
                     <img src={ element.thumbnail } alt={ element.title } />
                     <Typography
                       data-testid="shopping-cart-product-name"
-                      sx={ { fontSize: { xs: 13, sm: 15 } } }
+                      sx={ {
+                        fontSize: { xs: 13, sm: 15 },
+                        textAlign: 'justify',
+                        width: { xs: 94, md: 480 },
+                      } }
 
                     >
                       {element.title}
@@ -113,6 +117,7 @@ function ShoppingCart() {
                       ml={ 1 }
                       mr={ 1 }
                       display="flex"
+                      justifyContent="center"
                       alignItems="center"
                     >
                       <IconButton
@@ -137,7 +142,7 @@ function ShoppingCart() {
                           sx={ {
                             fontSize: 14,
                             position: 'absolute',
-                            transform: 'translate(60%, -5%)' } }
+                            transform: 'translate(67%, -5%)' } }
                         >
                           {element.quantidade}
                         </Typography>
@@ -155,6 +160,7 @@ function ShoppingCart() {
                       fontWeight={ 600 }
                       ml={ 1 }
                       mr={ 1 }
+                      width={ 60 }
                     >
                       {`R$${element.price}`}
 

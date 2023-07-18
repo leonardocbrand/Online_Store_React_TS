@@ -23,7 +23,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   const { pathname } = useLocation();
 
   const handleClick = () => {
-    navigate('shopping-cart');
+    navigate('/shopping-cart');
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,7 +41,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
   return (
     <AppBar sx={ { p: { xs: '8px 0 0 0' } } }>
       <Toolbar sx={ { justifyContent: 'space-between' } }>
-        {pathname === '/' && (
+        {pathname === '/' ? (
           <Paper
             component="form"
             onSubmit={ handleSubmit }
@@ -78,7 +78,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
               >
                 <SearchIcon sx={ { fill: '#2FC18C' } } />
               </IconButton>)}
-          </Paper>)}
+          </Paper>) : (<div />)}
         <StyledImg src={ logo } alt="" />
         <IconButton
           onClick={ handleClick }

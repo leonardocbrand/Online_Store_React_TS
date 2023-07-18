@@ -21,7 +21,13 @@ function Router() {
       />
       <Route path="/shopping-cart" element={ <ShoppingCart /> } />
       <Route path="/details/:idDetails" element={ <Details itensCar={ itensCar } /> } />
-      <Route path="/checkout" element={ <Checkout setItensCar={ setItensCar } /> } />
+      <Route
+        path="/checkout"
+        element={ <Checkout
+          itensCar={ itensCar }
+          setItensCar={ setItensCar }
+        /> }
+      />
     </Routes>
   );
 }
