@@ -20,7 +20,10 @@ function Router() {
         /> }
       />
       <Route path="/shopping-cart" element={ <ShoppingCart /> } />
-      <Route path="/details/:idDetails" element={ <Details itensCar={ itensCar } /> } />
+      <Route
+        path="/details/:idDetails"
+        element={ <Details itensCar={ itensCar } setItensCar={ setItensCar } /> }
+      />
       <Route
         path="/checkout"
         element={ <Checkout

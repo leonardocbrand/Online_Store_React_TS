@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Button, Container, IconButton,
+  Paper, Stack, Typography } from '@mui/material';
+import { Reply } from '@mui/icons-material';
 import { getProductById } from '../../services/api';
 import { ProductDetailsData, ProductsData } from '../../types';
 import Attributes from '../../components/Attributes';
 import Loading from '../../components/Loading';
 import Rating from '../../components/Rating';
-import ShoppingCartIcon from '../../components/ShoppingCartIcon';
+import Header from '../../components/Header';
+import { StyledDetailsImg } from '../../components/styles/StyledDetailsImg';
 
 type PropsDetailsIten = {
   itensCar: ProductsData[]
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
 };
 
-function Details({ itensCar }: PropsDetailsIten) {
+function Details({ itensCar, setItensCar }: PropsDetailsIten) {
   const navigate = useNavigate();
   const [productInfo, setProductInfo] = useState({} as ProductDetailsData);
   const { idDetails } = useParams();
-
-  function handleClick() {
-    navigate('/shopping-cart');
-  }
 
   function handleClickAddToCart(product: ProductDetailsData) {
     const productsList = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -28,12 +29,14 @@ function Details({ itensCar }: PropsDetailsIten) {
       const newProduct = { ...product, quantidade: 1 };
       const newProductsList = [...productsList, newProduct];
       localStorage.setItem('cart', JSON.stringify(newProductsList));
+      setItensCar(newProductsList);
     } else {
       verifyProduct.quantidade += 1;
       const newlistCar = productsList
         .filter((el: { id: any; }) => el.id !== verifyProduct.id);
       const newListCart2 = [...newlistCar, verifyProduct];
       localStorage.setItem('cart', JSON.stringify(newListCart2));
+      setItensCar(newListCart2);
     }
   }
 
@@ -48,42 +51,98 @@ function Details({ itensCar }: PropsDetailsIten) {
   }, [idDetails]);
 
   return (
-    <main>
-      <ShoppingCartIcon itensCar={ itensCar } />
+    <Container
+      sx={ {
+        backgroundColor: '#F5F5F5',
+        p: 0,
+        minWidth: '100%',
+        minHeight: '100vh' } }
+    >
+      <Header itensCar={ itensCar } setLoading={ () => {} } setProducts={ () => {} } />
+      <IconButton
+        onClick={ () => navigate(-1) }
+        sx={ { position: 'absolute', top: '80px', left: '10px' } }
+      >
+        <Reply sx={ { fill: '#2FC18C' } } />
+        <Typography p={ 1 } sx={ { color: '#2FC18C' } }>Voltar</Typography>
+      </IconButton>
       {productInfo.attributes ? (
-        <div>
-          <button
-            data-testid="shopping-cart-button"
-            onClick={ handleClick }
+        <Stack component="section">
+          <Box
+            display="flex"
+            justifyContent="space-evenly"
+            alignItems="center"
+            sx={ { flexDirection: { xs: 'column', md: 'row' } } }
           >
-            Carrinho
-          </button>
-          <p data-testid="product-detail-name">{productInfo.title}</p>
-          <p
-            data-testid="product-detail-price"
-          >
-            {` Preço: ${productInfo.currency_id} ${productInfo.price}`}
-          </p>
-          {productInfo.shipping.free_shipping
-          && <p data-testid="free-shipping">Frete grátis!</p>}
-          <img
-            data-testid="product-detail-image"
-            src={ productInfo.thumbnail }
-            alt=""
-          />
-          <Attributes productInfo={ productInfo } />
-          <button
-            data-testid="product-detail-add-to-cart"
-            onClick={ () => handleClickAddToCart(productInfo) }
-          >
-            Adicionar ao carrinho
-          </button>
+            <Paper
+              elevation={ 3 }
+              sx={ {
+                backgroundColor: '#FFF',
+                p: 1,
+                mt: 17,
+                width: { xs: 370, md: 488 },
+                height: { xs: 515, sm: 515 },
+                display: 'flex',
+                mb: { xs: 4, md: 0 },
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center' } }
+            >
+              <Typography
+                variant="h1"
+                mb={ 2 }
+                fontSize={ 20 }
+                fontWeight={ 700 }
+                textAlign="center"
+                data-testid="product-detail-name"
+              >
+                {productInfo.title}
+              </Typography>
+              <StyledDetailsImg
+                data-testid="product-detail-image"
+                src={ productInfo.pictures[0].url }
+                alt={ productInfo.title }
+              />
+            </Paper>
+            <Paper
+              elevation={ 3 }
+              sx={ { backgroundColor: '#FFF', width: { xs: 370, md: 488 }, p: 4 } }
+            >
+              <Attributes productInfo={ productInfo } />
+              {productInfo.shipping.free_shipping
+            && (
+              <Typography
+                variant="subtitle1"
+                color="#31C28D"
+                data-testid="free-shipping"
+              >
+                Frete grátis!
+              </Typography>)}
+              <Box display="flex" alignItems="center" justifyContent="space-evenly">
+                <Typography
+                  data-testid="product-detail-price"
+                  variant="body1"
+                  fontWeight={ 700 }
+                >
+                  {` R$ ${productInfo.price}`}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="success"
+                  data-testid="product-detail-add-to-cart"
+                  onClick={ () => handleClickAddToCart(productInfo) }
+                >
+                  Adicionar ao carrinho
+                </Button>
+              </Box>
+            </Paper>
+          </Box>
           <Rating />
-        </div>
+        </Stack>
       ) : (
         <Loading />
       )}
-    </main>
+    </Container>
   );
 }
 

@@ -28,6 +28,7 @@ export type ProductDetailsData = {
     free_shipping: boolean;
   };
   attributes: Attributes[];
+  pictures: Pictures[]
 };
 
 export type FormData = {
@@ -43,4 +44,9 @@ export type FormData = {
 export type Category = {
   id: string;
   name: string;
+};
+
+export type Pictures = {
+  id: string;
+  url: string;
 };
