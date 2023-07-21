@@ -68,7 +68,7 @@ function Checkout({ itensCar, setItensCar }: CheckoutProps) {
           {products.map((product, index) => (
             <>
               <Box
-                key={ product.id + product.thumbnail + index }
+                key={ product.id + product.thumbnail + index + product.title }
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"

@@ -8,27 +8,30 @@ import { HomePage } from '../pages/HomePage';
 
 function Router() {
   const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
-  const [itensCar, setItensCar] = useState<ProductsData[]>(cartLocalStorage);
+  const [itensCart, setItensCart] = useState<ProductsData[]>(cartLocalStorage);
 
   return (
     <Routes>
       <Route
         path="/"
         element={ <HomePage
-          itensCar={ itensCar }
-          setItensCar={ setItensCar }
+          itensCar={ itensCart }
+          setItensCar={ setItensCart }
         /> }
       />
-      <Route path="/shopping-cart" element={ <ShoppingCart /> } />
+      <Route
+        path="/shopping-cart"
+        element={ <ShoppingCart itensCar={ itensCart } setItensCar={ setItensCart } /> }
+      />
       <Route
         path="/details/:idDetails"
-        element={ <Details itensCar={ itensCar } setItensCar={ setItensCar } /> }
+        element={ <Details itensCar={ itensCart } setItensCar={ setItensCart } /> }
       />
       <Route
         path="/checkout"
         element={ <Checkout
-          itensCar={ itensCar }
-          setItensCar={ setItensCar }
+          itensCar={ itensCart }
+          setItensCar={ setItensCart }
         /> }
       />
     </Routes>

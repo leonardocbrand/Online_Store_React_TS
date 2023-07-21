@@ -3,44 +3,61 @@ import { useNavigate } from 'react-router-dom';
 import { Box,
   Button, Container, Divider, IconButton, Stack, Typography } from '@mui/material';
 import { Add, Clear, Remove, Reply } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 import { ProductsData } from '../../types';
 
-function ShoppingCart() {
-  const [products, setProducts] = useState<ProductsData[]>([]);
+type ShoppingCartProps = {
+  itensCar: ProductsData[];
+  setItensCar: React.Dispatch<React.SetStateAction<ProductsData[]>>
+};
+
+function ShoppingCart({ itensCar, setItensCar }: ShoppingCartProps) {
+  // const [products, setProducts] = useState<ProductsData[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const itensCart = localStorage.getItem('cart');
     if (itensCart) {
-      setProducts(JSON.parse(itensCart));
+      setItensCar(JSON.parse(itensCart));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(products));
-  }, [products]);
+    localStorage.setItem('cart', JSON.stringify(itensCar));
+  }, [itensCar]);
 
   const handleIncrease = (id: string) => {
-    const product = products.find((e) => e.id === id);
+    const product = itensCar.find((e) => e.id === id);
     if (product && product.quantidade < product.available_quantity) {
       const newObject = { ...product, quantidade: product.quantidade + 1 };
-      const newList = products.map((el) => (el.id !== product.id ? el : newObject));
-      setProducts(newList);
+      const newList = itensCar.map((el) => (el.id !== product.id ? el : newObject));
+      setItensCar(newList);
+    }
+    if (product?.quantidade === product?.available_quantity) {
+      Swal.fire(
+        'Número máximo de produtos',
+        `Só há ${product?.available_quantity} produto(s) disponível no momento`,
+        'info',
+      );
     }
   };
 
   const handleDecrease = (id: string) => {
-    const product = products.find((e) => e.id === id);
+    const product = itensCar.find((e) => e.id === id);
     if (product && product.quantidade > 1) {
       const newObject = { ...product, quantidade: product.quantidade - 1 };
-      const newList = products.map((el) => (el.id !== product.id ? el : newObject));
-      setProducts(newList);
+      const newList = itensCar.map((el) => (el.id !== product.id ? el : newObject));
+      setItensCar(newList);
+    }
+    if (product && product.quantidade === 1) {
+      const newList = itensCar.filter((element) => element.id !== id);
+      setItensCar(newList);
     }
   };
 
   const handleDelete = (id: string) => {
-    const newList = products.filter((product) => product.id !== id);
-    setProducts(newList);
+    const newList = itensCar.filter((product) => product.id !== id);
+    setItensCar(newList);
   };
 
   return (
@@ -59,7 +76,7 @@ function ShoppingCart() {
           alignItems: 'center',
           justifyContent: 'center' } }
       >
-        {products.length === 0 ? (
+        {itensCar.length === 0 ? (
           <Typography
             sx={ { width: '229px', height: '68px' } }
             variant="h1"
@@ -85,7 +102,7 @@ function ShoppingCart() {
             </Typography>
             <Divider />
             <Stack>
-              {products.map((element) => (
+              {itensCar.map((element) => (
                 <>
                   <Box
                     key={ element.id + element.thumbnail }
