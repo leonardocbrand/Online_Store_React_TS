@@ -28,7 +28,7 @@ function HomePage({ itensCar, setItensCar }: PropsHomePage) {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          sx={ { backgroundColor: '#F5F5F5', width: '100%' } }
+          sx={ { backgroundColor: '#F5F5F5', width: { xs: '90%', sm: '100%' } } }
         >
           {loading ? <Loading /> : <SearchList
             products={ products }
