@@ -3,6 +3,7 @@ export type ProductsData = {
   id: string;
   title: string;
   thumbnail: string;
+  secure_thumbnail: string;
   currency_id: string;
   price: number;
   available_quantity: number
