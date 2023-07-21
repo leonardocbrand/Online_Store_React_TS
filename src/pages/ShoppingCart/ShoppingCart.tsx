@@ -28,7 +28,9 @@ function ShoppingCart({ itensCar, setItensCar }: ShoppingCartProps) {
 
   const handleIncrease = (id: string) => {
     const product = itensCar.find((e) => e.id === id);
-    if (product && product.quantidade < product.available_quantity) {
+    if (product
+      && product.quantidade < product.available_quantity
+      && product.quantidade < 9) {
       const newObject = { ...product, quantidade: product.quantidade + 1 };
       const newList = itensCar.map((el) => (el.id !== product.id ? el : newObject));
       setItensCar(newList);

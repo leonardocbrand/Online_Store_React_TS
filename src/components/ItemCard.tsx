@@ -10,6 +10,7 @@ import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { NoEncryption } from '@mui/icons-material';
 import { ProductsData } from '../types';
 
 type ItemCardProps = {
@@ -32,24 +33,28 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
         </AspectRatio>
       </CardOverflow>
       <CardContent>
-        {/* <Link
-          data-testid="product-detail-link"
-          sx={ { fontSize: { xs: 13, md: 15 } } }
-          href={ `/details/${product.id}` }
-          fontWeight="xl"
-          fontSize="md"
-          color="neutral"
-          textColor="text.primary"
-          overlay
-          endDecorator={ <ArrowOutwardIcon /> }
+        <Button
+          onClick={ () => navigate(`/details/${product.id}`) }
+          sx={ { backgroundColor: '#FFF',
+            textAlign: 'justify',
+            '&:hover': {
+              backgroundColor: '#FFF',
+            } } }
         >
-          {product.title}
-        </Link> */}
-
-        <Button onClick={ () => navigate(`/details/${product.id}`) }>
-          {product.title}
+          <Link
+            data-testid="product-detail-link"
+            sx={ { fontSize: { xs: 13, md: 15 } } }
+            href={ `/details/${product.id}` }
+            fontWeight="xl"
+            fontSize="md"
+            color="neutral"
+            textColor="text.primary"
+            overlay
+            endDecorator={ <ArrowOutwardIcon /> }
+          >
+            {product.title}
+          </Link>
         </Button>
-
         <Typography
           fontWeight="xl"
           sx={ { mt: 1 } }
