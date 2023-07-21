@@ -22,7 +22,7 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={ { width: 250, maxWidth: '100%', boxShadow: 'lg', height: 365 } }>
+    <Card sx={ { width: 250, maxWidth: '100%', boxShadow: 'lg', height: 360 } }>
       <CardOverflow>
         <AspectRatio objectFit="contain">
           <img
@@ -37,23 +37,17 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
           onClick={ () => navigate(`/details/${product.id}`) }
           sx={ { backgroundColor: '#FFF',
             textAlign: 'justify',
+            fontWeight: 'xl',
+            fontSize: { xs: 13, md: 15 },
+            p: 1,
+            color: 'text.primary',
             '&:hover': {
               backgroundColor: '#FFF',
+              textDecoration: 'underline',
             } } }
         >
-          <Link
-            data-testid="product-detail-link"
-            sx={ { fontSize: { xs: 13, md: 15 } } }
-            href={ `/details/${product.id}` }
-            fontWeight="xl"
-            fontSize="md"
-            color="neutral"
-            textColor="text.primary"
-            overlay
-            endDecorator={ <ArrowOutwardIcon /> }
-          >
-            {product.title}
-          </Link>
+          {product.title}
+          <ArrowOutwardIcon />
         </Button>
         <Typography
           fontWeight="xl"
