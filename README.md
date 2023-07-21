@@ -1,5 +1,9 @@
 # FrontEnd Online Store - Mercado Livre API
 
+![React](https://img.shields.io/badge/React-17.0.2-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.4.4-blue)
+![Material-UI](https://img.shields.io/badge/Material--UI-5.0.0-blue)
+
 Este é o repositório do projeto de uma aplicação Front End de uma loja que recebe dados da API do Mercado Livre. A aplicação foi desenvolvida utilizando React, TypeScript e a biblioteca Material-UI (MUI) para a estilização.
 
 ## Visão Geral
