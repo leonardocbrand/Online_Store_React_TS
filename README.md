@@ -1,4 +1,4 @@
-# Loja Front End - Mercado Livre API
+# FrontEnd Online Store - Mercado Livre API
 
 Este é o repositório do projeto de uma aplicação Front End de uma loja que recebe dados da API do Mercado Livre. A aplicação foi desenvolvida utilizando React, TypeScript e a biblioteca Material-UI (MUI) para a estilização.
 
