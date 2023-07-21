@@ -21,8 +21,7 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
       <CardOverflow>
         <AspectRatio objectFit="contain">
           <img
-            src={ product.secure_thumbnail }
-            srcSet={ product.secure_thumbnail }
+            src={ product.thumbnail }
             loading="lazy"
             alt={ product.title }
           />
