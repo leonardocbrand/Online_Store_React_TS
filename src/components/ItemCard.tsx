@@ -8,6 +8,8 @@ import Chip from '@mui/joy/Chip';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { ProductsData } from '../types';
 
 type ItemCardProps = {
@@ -16,6 +18,8 @@ type ItemCardProps = {
 };
 
 export default function ItemCard({ product, onClick }: ItemCardProps) {
+  const navigate = useNavigate();
+
   return (
     <Card sx={ { width: 250, maxWidth: '100%', boxShadow: 'lg', height: 365 } }>
       <CardOverflow>
@@ -28,7 +32,7 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
         </AspectRatio>
       </CardOverflow>
       <CardContent>
-        <Link
+        {/* <Link
           data-testid="product-detail-link"
           sx={ { fontSize: { xs: 13, md: 15 } } }
           href={ `/details/${product.id}` }
@@ -40,7 +44,11 @@ export default function ItemCard({ product, onClick }: ItemCardProps) {
           endDecorator={ <ArrowOutwardIcon /> }
         >
           {product.title}
-        </Link>
+        </Link> */}
+
+        <Button onClick={ () => navigate(`/details/${product.id}`) }>
+          {product.title}
+        </Button>
 
         <Typography
           fontWeight="xl"

@@ -24,7 +24,7 @@ function Router() {
         element={ <ShoppingCart itensCar={ itensCart } setItensCar={ setItensCart } /> }
       />
       <Route
-        path="/details/:idDetails"
+        path="details/:idDetails"
         element={ <Details itensCar={ itensCart } setItensCar={ setItensCart } /> }
       />
       <Route
