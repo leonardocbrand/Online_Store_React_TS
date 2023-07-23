@@ -4,6 +4,7 @@ export const StyledImg = styled.img`
   width: 250px;
   height: 60px;
   padding: 2px;
+  cursor: pointer;
   @media (max-width: 768px) {
     width: 180px;
     height: 60px;

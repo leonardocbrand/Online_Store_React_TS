@@ -79,7 +79,7 @@ function Header({ itensCar, setProducts, setLoading }: HeaderProps) {
                 <SearchIcon sx={ { fill: '#2FC18C' } } />
               </IconButton>)}
           </Paper>) : (<div />)}
-        <StyledImg src={ logo } alt="" />
+        <StyledImg src={ logo } alt="" onClick={ () => navigate('/') } />
         <IconButton
           onClick={ handleClick }
           data-testid="shopping-cart-button"

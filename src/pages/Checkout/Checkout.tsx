@@ -104,7 +104,7 @@ function Checkout({ itensCar, setItensCar }: CheckoutProps) {
             textAlign="center"
             mt={ 2 }
           >
-            {`Total: R$ ${totalPrice}`}
+            {`Total: R$ ${totalPrice?.toFixed(2)}`}
 
           </Typography>
         </Paper>

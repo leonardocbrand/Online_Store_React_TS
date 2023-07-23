@@ -56,7 +56,7 @@ function CheckoutForm({ setItensCar }: CheckoutFormProps) {
       sx={ {
         backgroundColor: '#FFF',
         ml: { xs: 0, md: 5 },
-        height: { xs: '80h', lg: '60vh' },
+        minHeight: '60vh',
         width: { xs: 370, md: 700 },
         p: 5,
         mt: { xs: 2, md: 17 } } }
