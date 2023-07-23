@@ -92,7 +92,7 @@ function Checkout({ itensCar, setItensCar }: CheckoutProps) {
                   {product.title}
                 </Typography>
                 <Typography fontSize={ 15 } fontWeight={ 600 }>
-                  {`R$${Number(product.price) * Number(product.quantidade)}`}
+                  {`R$${(Number(product.price) * Number(product.quantidade)).toFixed(2)}`}
                 </Typography>
               </Box>
               <Divider />
